@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1093092204086",
+    "project_id": "shield-d580a",
+    "storage_bucket": "shield-d580a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093092204086:android:4eb9f52d5db7c5638f8297",
+        "android_client_info": {
+          "package_name": "com.example.shield"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1093092204086-t3nfnl1ri85ul66id0vus3r0peh06u59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyEKO1-d1TUfWucsiLixX1WjMs0Duodu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1093092204086-t3nfnl1ri85ul66id0vus3r0peh06u59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
