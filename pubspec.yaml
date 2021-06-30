@@ -47,7 +47,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  intro_slider: ^3.0.22
+  intro_slider: ^3.0.2
+  firebase_auth: ^1.4.1
+  sms_autofill: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

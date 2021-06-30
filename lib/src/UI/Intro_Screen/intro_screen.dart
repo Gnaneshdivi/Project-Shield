@@ -18,24 +18,30 @@ class IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.initState();
+    slides.add(
+      new Slide(
+          description:
+              "Here Is Team Shield To Protect Women From Harrasment And Abuse ",
+          styleDescription: TextStyle(
+              color: Colors.black, fontSize: 30.0, fontFamily: 'RobotoMono'),
+          marginDescription:
+              EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+          centerWidget: Image.asset("assets/warrior.png"),
+          directionColorBegin: Alignment.topLeft,
+          directionColorEnd: Alignment.bottomRight,
+          onCenterItemPress: () {},
+          backgroundColor: Colors.white),
+    );
 
     slides.add(
       new Slide(
-          maxLineTitle: 2,
-          styleTitle: TextStyle(
-              color: Colors.black,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'RobotoMono'),
-          description: "hola",
+          description:
+              "AI integration increases the accuracy to analyse and eliminate fake alerts with several type of triggers",
           styleDescription: TextStyle(
-              color: Colors.black,
-              fontSize: 20.0,
-              fontStyle: FontStyle.italic,
-              fontFamily: 'Raleway'),
+              color: Colors.black, fontSize: 30.0, fontFamily: 'RobotoMono'),
           marginDescription:
               EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
-          centerWidget: Image.asset("assets/img1.jpg"),
+          centerWidget: Image.asset("assets/ai.jpg"),
           directionColorBegin: Alignment.topLeft,
           directionColorEnd: Alignment.bottomRight,
           onCenterItemPress: () {},
@@ -43,21 +49,13 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-          maxLineTitle: 2,
-          styleTitle: TextStyle(
-              color: Colors.black,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'RobotoMono'),
-          description: "hello",
+          description:
+              "Alerts are sent to emergency contacts and police authorities along with the system location",
           styleDescription: TextStyle(
-              color: Colors.black,
-              fontSize: 20.0,
-              fontStyle: FontStyle.italic,
-              fontFamily: 'Raleway'),
-          marginDescription:
-              EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
-          centerWidget: Image.asset("assets/img2.jpg"),
+              color: Colors.black, fontSize: 30.0, fontFamily: 'RobotoMono'),
+          marginDescription: const EdgeInsets.only(
+              left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+          centerWidget: Image.asset("assets/virtual-assistant.png"),
           directionColorBegin: Alignment.topLeft,
           directionColorEnd: Alignment.bottomRight,
           onCenterItemPress: () {},
@@ -65,21 +63,15 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-          maxLineTitle: 2,
-          styleTitle: TextStyle(
-              color: Colors.black,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'RobotoMono'),
-          description: "bonjour",
+          description:
+              "Special features for digital / phone call abuse can be reported and the suspected caller IDs after analysis will be sent to required authority",
           styleDescription: TextStyle(
-              color: Colors.black,
-              fontSize: 20.0,
-              fontStyle: FontStyle.italic,
-              fontFamily: 'Raleway'),
+            color: Colors.black,
+            fontSize: 30.0,
+          ),
           marginDescription:
               EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
-          centerWidget: Image.asset("assets/img3.jpg"),
+          centerWidget: Image.asset("assets/social.png"),
           directionColorBegin: Alignment.topLeft,
           directionColorEnd: Alignment.bottomRight,
           onCenterItemPress: () {},
@@ -105,6 +97,7 @@ class IntroScreenState extends State<IntroScreen> {
   Widget renderDoneBtn() {
     return Icon(
       Icons.done,
+      size: 35,
       color: Colors.orange[700],
     );
   }
@@ -112,6 +105,7 @@ class IntroScreenState extends State<IntroScreen> {
   Widget renderSkipBtn() {
     return Icon(
       Icons.skip_next,
+      size: 35,
       color: Colors.orange[700],
     );
   }
@@ -119,8 +113,9 @@ class IntroScreenState extends State<IntroScreen> {
   ButtonStyle myButtonStyle() {
     return ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(StadiumBorder()),
-      backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-      overlayColor: MaterialStateProperty.all<Color>(Colors.yellow),
+      backgroundColor:
+          MaterialStateProperty.all<Color>(Colors.lightBlue.shade200),
+      overlayColor: MaterialStateProperty.all<Color>(Colors.lightBlue.shade200),
     );
   }
 
@@ -144,7 +139,7 @@ class IntroScreenState extends State<IntroScreen> {
       doneButtonStyle: myButtonStyle(),
 
       // Dot indicator
-      colorDot: Colors.yellowAccent,
+      colorDot: Colors.lightBlue,
       colorActiveDot: Colors.orange,
       sizeDot: 13.0,
 
