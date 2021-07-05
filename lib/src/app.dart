@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shield/src/UI/Intro_Screen/intro_screen.dart';
+import 'package:shield/src/blocs/authservices.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -11,8 +11,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: IntroScreen(),
       debugShowCheckedModeBanner: false,
+      home: AuthService().handleAuth(),
     );
   }
 }
