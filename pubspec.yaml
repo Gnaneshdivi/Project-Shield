@@ -36,6 +36,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   cloud_firestore: ^2.2.1
   firebase_core: ^1.2.1
+  intro_slider: ^3.0.2
+  firebase_auth: ^2.0.0
+  sms_autofill: ^2.0.0
+  otp_text_field: ^1.1.1
+  geolocator: ^7.2.0+1
+  wifi_iot: ^0.3.3
+  flutter_blue: ^0.8.0 
 
 dev_dependencies:
   flutter_test:
@@ -47,10 +54,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  intro_slider: ^3.0.2
-  firebase_auth: ^2.0.0
-  sms_autofill: ^2.0.0
-  otp_text_field: ^1.1.1
+  location: ^4.2.0
+  
+  
   
 
 # For information on the generic Dart part of this file, see the

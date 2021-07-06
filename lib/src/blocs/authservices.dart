@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shield/src/UI/Home_Screen/Dashboard_screen.dart';
-import 'package:shield/src/UI/Signup_Screen/signup_screen.dart';
+import 'package:shield/src/UI/Home_Screen/dashboardscreen.dart';
+import 'package:shield/src/UI/Signup_Screen/signupscreen.dart';
 
 class AuthService {
   //Handles Auth
@@ -23,13 +24,16 @@ class AuthService {
   }
 
   //SignIn
-  signIn(AuthCredential authCreds) {
+  signIn(AuthCredential authCreds, phoneNo, adhar, name) {
     FirebaseAuth.instance.signInWithCredential(authCreds);
+    FirebaseFirestore.instance
+        .collection('Users')
+        .add({"phone": '$phoneNo', "adharno": '$adhar', "name": '$name'});
   }
 
-  signInWithOTP(smsCode, verId) {
+  signInWithOTP(smsCode, verId, phoneNo, adhar, name) {
     AuthCredential authCreds =
         PhoneAuthProvider.credential(verificationId: verId, smsCode: smsCode);
-    signIn(authCreds);
+    signIn(authCreds, phoneNo, adhar, name);
   }
 }

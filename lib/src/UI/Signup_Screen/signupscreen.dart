@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'package:shield/src/blocs/authservices.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_text_field.dart';
@@ -15,29 +19,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
 
-  late String phoneNo, verificationId, smsCode;
+  late String phoneNo,
+      verificationId,
+      smsCode = "******",
+      adhar = '',
+      name = '';
 
   bool codeSent = false;
   bool loading = false;
   late Timer _timer;
-  int _start = 50;
-
-  void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (_start == 0) {
-          setState(() {
-            timer.cancel();
-          });
-        } else {
-          setState(() {
-            _start--;
-          });
-        }
-      },
-    );
+  int _start = 30;
+  late final PhoneVerificationCompleted verified;
+  Future<void> signupwithtimer() async {
+    await AuthService()
+        .signInWithOTP(smsCode, verificationId, phoneNo, adhar, name);
   }
 
   @override
@@ -82,7 +77,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     style: TextStyle(color: Colors.black),
                     keyboardType: TextInputType.phone,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      this.adhar = value;
+                    },
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "ADHAR NUMBER",
@@ -101,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
+                        // ignore: prefer_const_constructors
                         BoxShadow(
                             color: Color.fromRGBO(143, 148, 251, .2),
                             blurRadius: 20.0,
@@ -108,8 +106,10 @@ class _LoginPageState extends State<LoginPage> {
                       ]),
                   child: TextField(
                     style: TextStyle(color: Colors.black),
-                    keyboardType: TextInputType.phone,
-                    onChanged: (value) {},
+                    keyboardType: TextInputType.name,
+                    onChanged: (value) {
+                      this.name = value;
+                    },
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "NAME",
@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Padding(
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                           color: Color.fromRGBO(143, 148, 251, .2),
                           blurRadius: 20.0,
                           offset: Offset(0, 10))
@@ -229,26 +229,26 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     print('pressed');
                     codeSent
-                        ? {AuthService().signInWithOTP(smsCode, verificationId)}
-                        : verifyPhone(phoneNo).then((value) => {startTimer()});
+                        ? signupwithtimer()
+                        : {verifyPhone(phoneNo), startTimer()};
                   },
                   child: Container(
                     height: 50,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        gradient: LinearGradient(colors: [
+                        gradient: const LinearGradient(colors: [
                           Color.fromRGBO(143, 148, 251, 1),
                           Color.fromRGBO(143, 148, 251, .6),
                         ])),
                     child: Center(
                         child: codeSent
-                            ? Text(
+                            ? const Text(
                                 'Login',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               )
-                            : Text(
+                            : const Text(
                                 'Verify',
                                 style: TextStyle(
                                     color: Colors.white,
@@ -257,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 70,
               ),
             ],
@@ -265,12 +265,36 @@ class _LoginPageState extends State<LoginPage> {
         )));
   }
 
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) async {
+        if (_start == 0) {
+          if (mounted) {
+            setState(() {
+              timer.cancel();
+            });
+          }
+        } else {
+          if (mounted) {
+            setState(() {
+              _start--;
+            });
+          }
+        }
+      },
+    );
+  }
+
   Future<void> verifyPhone(phoneNo) async {
-    print("hello");
-    final PhoneVerificationCompleted verified = (AuthCredential authResult) {
-      AuthService().signIn(authResult);
+    // ignore: prefer_function_declarations_over_variables
+    verified = (AuthCredential authResult) {
+      AuthService().signIn(authResult, phoneNo, adhar, name);
     };
 
+    // ignore: prefer_function_declarations_over_variables
     final PhoneVerificationFailed verificationfailed = (e) {
       print('${e.message}');
     };
