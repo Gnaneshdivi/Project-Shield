@@ -12,19 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  StreamSubscription<Position> positionStream =
-      Geolocator.getPositionStream().listen((Position position) {
-    print(position == null
-        ? 'Unknown'
-        : position.latitude.toString() + ', ' + position.longitude.toString());
-  });
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Logs().bluetooth();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

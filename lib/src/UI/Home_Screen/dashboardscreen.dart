@@ -2,8 +2,13 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:shield/src/UI/contacts/contacts.dart';
+import 'package:shield/src/UI/mainscreen/mainscreen.dart';
 import 'package:shield/src/blocs/authservices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shield/src/blocs/locationservices.dart';
+import 'package:shield/src/blocs/logs.dart';
 import '../../blocs/hardwarevuttons.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -16,17 +21,10 @@ class _DashboardPageState extends State<DashboardPage> {
   var _currentIndex = 1;
   List<Widget> bodydata = [
     Center(
-      child: Text(
-        'POlice',
-        style: TextStyle(color: Colors.black),
-      ),
-    ),
-    Center(
       child: Text('home', style: TextStyle(color: Colors.black)),
     ),
-    Center(
-      child: Text('contacts', style: TextStyle(color: Colors.black)),
-    ),
+    MainScreen(),
+    Contactsscreen(),
     Center(
       child: Text('profile', style: TextStyle(color: Colors.black)),
     ),
@@ -34,6 +32,12 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      Logs().bluetooth();
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
