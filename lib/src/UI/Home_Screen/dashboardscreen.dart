@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shield/src/UI/contacts/contacts.dart';
 import 'package:shield/src/UI/mainscreen/mainscreen.dart';
+import 'package:shield/src/UI/profile/profile.dart';
 import 'package:shield/src/blocs/authservices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shield/src/blocs/locationservices.dart';
@@ -25,9 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
     ),
     MainScreen(),
     Contactsscreen(),
-    Center(
-      child: Text('profile', style: TextStyle(color: Colors.black)),
-    ),
+    ProfileScreen(),
   ];
 
   @override

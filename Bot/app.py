@@ -24,7 +24,6 @@ def sms_reply():
     resp = MessagingResponse()
     if(msg.lower()=="hello"):
         resp.message("hello")
-
     return str(resp)
 
 if __name__ == "__main__":
